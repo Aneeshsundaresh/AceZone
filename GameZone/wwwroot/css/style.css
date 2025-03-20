@@ -1,0 +1,158 @@
+﻿body {
+    background: linear-gradient(to bottom, #0f1016, #000000); /* Dark background with subtle gradient */
+    color: #eee; /* Light text color for contrast */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.intro {
+    text-align: center;
+    padding: 100px 20px;
+    background: url('../images/intro-bg.jpg') no-repeat center center; /* Replace with your image */
+    background-size: cover;
+    position: relative;
+    min-height: 400px;
+}
+
+    .intro h1 {
+        color: #00ffff; /* Bright cyan for headings */
+        font-size: 3em;
+        text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff;
+        -webkit-text-stroke: 1px #000;
+        margin-bottom: 0.5em;
+    }
+
+    .intro p {
+        font-size: 1.2em;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        color: #ccc; /* Slightly darker text for paragraph readability */
+    }
+
+.interactive-model {
+    width: 400px;
+    height: 300px;
+    background: rgba(0, 255, 255, 0.1); /* Subtle cyan background */
+    border: 2px solid #00ffff; /* Bright cyan border */
+    border-radius: 10px;
+    margin: 40px auto;
+    perspective: 1000px;
+}
+
+    .interactive-model:hover {
+        animation: rotateModel 10s infinite linear;
+    }
+
+@keyframes rotateModel {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.mission {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(to bottom, #141e30, #243b55); /* Darker blue background */
+}
+
+    .mission h2 {
+        color: #fff; /* White for mission heading */
+        font-size: 2.5em;
+        text-shadow: 0 0 15px #00ffff;
+        margin-bottom: 0.5em;
+    }
+
+    .mission p {
+        font-size: 1.1em;
+        line-height: 1.6;
+        max-width: 700px;
+        margin: 0 auto;
+        color: #ddd; /* Slightly darker text for readability */
+    }
+
+.facility {
+    padding: 80px 20px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+    .facility.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .facility .content {
+        background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+        padding: 40px;
+        border-radius: 10px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .facility h2 {
+        color: #00ffff; /* Bright cyan for facility headings */
+        font-size: 2em;
+        text-shadow: 0 0 10px #00ffff;
+        margin-bottom: 1em;
+    }
+
+    .facility p {
+        font-size: 1em;
+        line-height: 1.6;
+        color: #ccc; /* Slightly darker text for readability */
+    }
+
+    .facility ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .facility li {
+        margin-bottom: 10px;
+        color: #ddd; /* Slightly darker text for list items */
+    }
+
+.quantum-arcade {
+    background-image: url('../images/quantum-arcade.jpg');
+}
+
+.kidzone {
+    background-image: url('../images/kidzone.jpg');
+}
+
+.esports-arena {
+    background-image: url('../images/esports-arena.jpg');
+}
+
+.social-lounge {
+    background-image: url('../images/social-lounge.jpg');
+}
+
+#aneesh-nav-item { /* Assuming you give "Aneesh" a unique ID */
+    font-family: 'Press Start 2P', cursive; /* Example pixelated font */
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff; /* Enhanced glow */
+    -webkit-text-stroke: 1px #000; /* Dark outline */
+    animation: glow-pulse 2s infinite alternate; /* Pulsing glow animation */
+}
+
+@keyframes glow-pulse {
+    from {
+        text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+    }
+
+    to {
+        text-shadow: 0 0 15px #0ff, 0 0 25px #0ff, 0 0 35px #0ff;
+    }
+}
