@@ -1,0 +1,42 @@
+﻿@model List<GameZone.Models.RegisterViewModel>
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<div class="admin-games">
+    <h1>Manage Users</h1>
+    <a asp-action="CreateGame" asp-controller="Admin" class="btn btn-primary">Create New Game</a>
+    <table class="table" id="Gamestable">
+        <thead>
+            <tr>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>
+                        <a asp-action="EditGame" asp-controller="Admin" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="DeleteGame" asp-controller="Admin" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#Gamestable').DataTable();
+    });
+</script>

@@ -1,0 +1,14 @@
+﻿@model GameZone.Models.Game
+@{
+    ViewData["Title"] = "Delete Game";
+}
+
+<div class="delete-game">
+    <h1>Delete Game</h1>
+    <h3>Are you sure you want to delete @Model.Name?</h3>
+    <form asp-action="DeleteGame" asp-controller="Admin" asp-route-id="@Model.Id" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Details" asp-controller="Game" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

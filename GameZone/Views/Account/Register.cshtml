@@ -1,0 +1,89 @@
+﻿@model GameZone.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+<h2>Register</h2>
+<form asp-controller="Account" asp-action="Register" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Password</label>
+        <div class="input-group">
+            <input asp-for="Password" type="password" class="form-control" id="passwordInput" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                    <i class="bi bi-eye" id="eyeIcon"></i>
+                </button>
+            </div>
+        </div>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ConfirmPassword">Confirm Password</label>
+        <div class="input-group">
+            <input asp-for="ConfirmPassword" type="password" class="form-control" id="confirmPasswordInput" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                    <i class="bi bi-eye" id="confirmEyeIcon"></i>
+                </button>
+            </div>
+        </div>
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Password toggle
+            $("#togglePassword").click(function () {
+                var passwordInput = $("#passwordInput");
+                var eyeIcon = $("#eyeIcon");
+
+                if (passwordInput.attr("type") === "password") {
+                    passwordInput.attr("type", "text");
+                    eyeIcon.removeClass("bi-eye").addClass("bi-eye-slash");
+                } else {
+                    passwordInput.attr("type", "password");
+                    eyeIcon.removeClass("bi-eye-slash").addClass("bi-eye");
+                }
+            });
+
+            // Confirm Password toggle
+            $("#toggleConfirmPassword").click(function () {
+                var confirmPasswordInput = $("#confirmPasswordInput");
+                var confirmEyeIcon = $("#confirmEyeIcon");
+
+                if (confirmPasswordInput.attr("type") === "password") {
+                    confirmPasswordInput.attr("type", "text");
+                    confirmEyeIcon.removeClass("bi-eye").addClass("bi-eye-slash");
+                } else {
+                    confirmPasswordInput.attr("type", "password");
+                    confirmEyeIcon.removeClass("bi-eye-slash").addClass("bi-eye");
+                }
+            });
+        });
+    </script>
+}

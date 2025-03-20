@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<div class="admin-dashboard">
+    <h1 class="neon-text">Admin Dashboard</h1>
+    <br />
+    <br />
+    <div class="metrics-dashboard">
+        <div class="metric-card neon-border">
+            <h3 class="metric-title">Total Bookings</h3>
+            <p class="metric-value">@ViewBag.TotalBookings</p>
+        </div>
+        <div class="metric-card neon-border">
+            <h3 class="metric-title">Total Games</h3>
+            <p class="metric-value">@ViewBag.TotalGames</p>
+        </div>
+        <div class="metric-card neon-border">
+            <h3 class="metric-title">Active Users</h3>
+            <p class="metric-value">@ViewBag.ActiveUsers</p>
+        </div>
+    </div>
+    <br />
+    <hr />
+    <h1 class="text-center">All Bookings</h1>
+    <br />
+
+    <table class="table neon-border" id="bookingsTable">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Game</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in ViewBag.Bookings)
+            {
+                <tr>
+                    <td>@booking.User.UserName</td>
+                    <td>@booking.Game.Name</td>
+                    <td>@booking.BookingDate.ToShortDateString()</td>
+                    <td>@booking.BookingTime</td>
+                    <td>@booking.Duration hours</td>
+                    <td>@booking.Status</td>
+                    @* <td> *@
+                    @*     <a asp-action="EditBooking" asp-route-id="@booking.Id" class="btn btn-sm btn-primary">Edit</a> *@
+                    @*     <a asp-action="DeleteBooking" asp-route-id="@booking.Id" class="btn btn-sm btn-danger">Delete</a> *@
+                    @*     @if (booking.Status == "Pending") *@
+                    @*     { *@
+                    @*         <form asp-action="ConfirmBooking" asp-controller="Booking" asp-route-id="@booking.Id" method="post" style="display:inline;"> *@
+                    @*             <button type="submit" class="btn btn-sm btn-success">Confirm</button> *@
+                    @*         </form> *@
+                    @*     } *@
+                    @* </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#bookingsTable').DataTable();
+    });
+</script>

@@ -1,0 +1,57 @@
+﻿@model GameZone.Models.Feedback
+
+@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<div class="container">
+    <h1>Contact Us</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Get in Touch</h2>
+            <p>We'd love to hear from you. Please fill out the form below or contact us using the information provided.</p>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+
+            <form asp-action="Contact" method="post">
+                <div class="form-group">
+                    <label asp-for="Name">Name:</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email">Email:</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Message">Message:</label>
+                    <textarea asp-for="Message" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Feedback</button>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <h2>Contact Information</h2>
+            <p><strong>Address:</strong> 123 GameZone Street, City, State, Zip</p>
+            <p><strong>Phone:</strong> (123) 456-7890</p>
+            <p><strong>Email:</strong> info@gamezone.com</p>
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15547.255239949396!2d77.61924415!3d13.0475205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1765b5eaaaab%3A0x7e080adef1489e8d!2sCognizant%20Technology%20Solutions!5e0!3m2!1sen!2sin!4v1740725902426!5m2!1sen!2sin" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

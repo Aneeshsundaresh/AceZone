@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "City Details";
+
+    var cityId = ViewContext.RouteData.Values["id"]; // Get the city ID from the URL
+
+    var cities = new[] {
+       new {
+            CityId = 1,
+            CityName = "New York",
+            CityImage = "newyork.jpg",
+            CityDescription = "The city that never sleeps.",
+            GameZones = new[] {
+                new { BranchName = "Times Square", Games = new[] { "Game A", "Game B" } },
+                new { BranchName = "Central Park", Games = new[] { "Game C", "Game D" } }
+            }
+        },
+        new {
+            CityId = 2,
+            CityName = "London",
+            CityImage = "london.jpg",
+            CityDescription = "A historic city with modern flair.",
+            GameZones = new[] {
+                new { BranchName = "Oxford Street", Games = new[] { "Game E", "Game F" } },
+                new { BranchName = "Piccadilly Circus", Games = new[] { "Game G", "Game H" } }
+            }
+        },
+        // Add 4 more cities here...
+        new {
+            CityId = 3,
+            CityName = "Paris",
+            CityImage = "paris.jpg",
+            CityDescription = "The city of lights.",
+            GameZones = new[] {
+                new { BranchName = "Eiffel Tower", Games = new[] { "Game I", "Game J" } },
+                new { BranchName = "Louvre", Games = new[] { "Game K", "Game L" } }
+            }
+        },
+        new {
+            CityId = 4,
+            CityName = "Tokyo",
+            CityImage = "tokyo.jpg",
+            CityDescription = "A vibrant and modern city.",
+            GameZones = new[] {
+                new { BranchName = "Shibuya", Games = new[] { "Game M", "Game N" } },
+                new { BranchName = "Akihabara", Games = new[] { "Game O", "Game P" } }
+            }
+        },
+        new {
+            CityId = 5,
+            CityName = "Rome",
+            CityImage = "rome.jpg",
+            CityDescription = "The eternal city.",
+            GameZones = new[] {
+                new { BranchName = "Colosseum", Games = new[] { "Game Q", "Game R" } },
+                new { BranchName = "Vatican City", Games = new[] { "Game S", "Game T" } }
+            }
+        },
+        new {
+            CityId = 6,
+            CityName = "Sydney",
+            CityImage = "sydney.jpg",
+            CityDescription = "A beautiful city with iconic landmarks.",
+            GameZones = new[] {
+                new { BranchName = "Opera House", Games = new[] { "Game U", "Game V" } },
+                new { BranchName = "Harbour Bridge", Games = new[] { "Game W", "Game X" } }
+            }
+        }
+    };
+
+    var city = cities.FirstOrDefault(c => c.CityId == int.Parse(cityId.ToString()));
+
+    if (city == null)
+    {
+        <p>City not found.</p>
+        return;
+    }
+}
+
+<div class="city-details-container">
+    <h1 class="neon-text">@city.CityName</h1>
+
+    <div class="city-details-content">
+        <img src="@city.CityImage" alt="@city.CityName" class="city-image" />
+
+        <p class="city-description">@city.CityDescription</p>
+
+        <div class="game-zones-list">
+            @foreach (var gameZone in city.GameZones)
+            {
+                <div class="game-zone-card neon-border">
+                    <h3 class="game-zone-title">@gameZone.BranchName</h3>
+                    <ul class="games-list">
+                        @foreach (var game in gameZone.Games)
+                        {
+                            <li>@game</li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+</div>

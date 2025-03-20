@@ -1,0 +1,73 @@
+﻿@model List<GameZone.Models.Booking>
+@{
+    ViewData["Title"] = "View Bookings";
+}
+
+<div class="admin-bookings">
+    <h1>View Bookings</h1>
+
+    <form asp-action="Bookings" method="get">
+        <div class="form-row">
+            <div class="col-md-4">
+                <input type="text" name="searchString" class="form-control" placeholder="Search by User or Game" value="@ViewBag.SearchString" />
+            </div>
+            <div class="col-md-3">
+                <select name="statusFilter" class="form-control">
+                    <option value="All">All Statuses</option>
+                    <option value="Pending" selected="@(ViewBag.StatusFilter == "Pending" ? "selected" : null)">Pending</option>
+                    <option value="Confirmed" selected="@(ViewBag.StatusFilter == "Confirmed" ? "selected" : null)">Confirmed</option>
+                    <option value="Cancelled" selected="@(ViewBag.StatusFilter == "Cancelled" ? "selected" : null)">Cancelled</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+
+   
+    <table class="table" id="book">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Game</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.User?.UserName</td>
+                    <td>@booking.Game?.Name</td>
+                    <td>@booking.BookingDate.ToShortDateString()</td>
+                    <td>@booking.BookingTime</td>
+                    <td>@booking.Duration hours</td>
+                    <td>@booking.Status</td>
+                    <td>
+                        <a asp-action="EditBooking" asp-route-id="@booking.Id" class="btn btn-sm btn-primary">Edit</a>
+                        <a asp-action="DeleteBooking" asp-route-id="@booking.Id" class="btn btn-sm btn-danger">Delete</a>
+                        @if (booking.Status == "Pending")
+                        {
+                            <form asp-action="ConfirmBooking" asp-controller="Booking"  asp-route-id="@booking.Id" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#book').DataTable();
+    });
+</script>

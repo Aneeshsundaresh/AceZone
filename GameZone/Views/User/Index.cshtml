@@ -1,0 +1,134 @@
+﻿@model List<GameZone.Models.Booking>
+@{
+    ViewData["Title"] = "User Dashboard";
+}
+
+    <div class="user-dashboard">
+        <h1 class="neon-text">Welcome Gamer</h1>
+    </div>
+    <div class="booking-summary">
+        <canvas id="bookingsChart" width="400" height="500"></canvas>
+    </div>
+    <div class="user-dashboard">
+    <h1>My Bookings</h1>
+    </div>
+
+    <table class="table neon-border" id="book">
+        <thead>
+            <tr>
+                <th>Game</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.Game.Name</td>
+                    <td>@booking.BookingDate.ToShortDateString()</td>
+                    <td>@booking.BookingTime</td>
+                    <td>@booking.Duration hours</td>
+                    <td>@booking.Status</td>
+                    <td>
+                        @if (booking.Status != "Cancelled")
+                        {
+                            <form asp-action="CancelBooking" asp-controller="User" asp-route-id="@booking.Id">
+                                <button class="btn btn-sm btn-danger" type="submit">Cancel Booking</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+<br />
+<br />
+<a asp-controller="Booking" asp-action="Create" class="btn btn-warning btn-outline-success btn-lg btnclass">Book Game Tickets</a>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#book').DataTable();
+    });
+</script>
+ 
+<script>
+    function updateChart() {
+        fetch('/Booking/GetBookingCounts')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('bookingsChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie', // Or 'bar', 'doughnut', etc.
+                    data: {
+                        labels: ['Pending', 'Cancelled', 'Confirmed'],
+                        datasets: [{
+                            label: 'Booking Status',
+                            data: [data.pending, data.cancelled, data.confirmed],
+                            backgroundColor: [
+                                'rgba(255, 206, 86, 0.2)', // Yellow for Pending
+                                'rgba(255, 99, 132, 0.2)',  // Red for Cancelled
+                                'rgba(75, 192, 192, 0.2)'  // Green for Confirmed
+                            ],
+                            borderColor: [
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(75, 192, 192, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            });
+    }
+
+    updateChart(); // Initial chart rendering
+
+    // Optional: Update the chart every 5 seconds (adjust as needed)
+    setInterval(updateChart, 5000);
+
+   
+
+</script>
+<style>
+    .btnclass {
+        width: 100%;
+    }
+    .book-now-button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-size: 2em;
+        padding: 1em 2em;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        width: 100%;
+        max-width: 600px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        text-align: center;
+    }
+
+        .book-now-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+    
+
+   
+</style>
+                           

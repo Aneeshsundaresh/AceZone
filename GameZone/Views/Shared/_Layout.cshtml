@@ -1,0 +1,132 @@
+﻿@{
+    string currentUserName = ViewBag.FirstName as string;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - GameZone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+</head>
+<body class="bg-gradient">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark custom-navbar custom-shape-navbar">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/logo.png" alt="GameZone Logo" class="logo-img" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="Game" asp-action="Index">Our Games</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="Home" asp-action="Locations">Our Locations</a>
+                        </li>
+                        
+                        @if (User.Identity.IsAuthenticated)
+                        {   
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="Admin" asp-action="Games">Games</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="Admin" asp-action="Bookings">Bookings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                                </li>
+                                
+
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="User" asp-action="Index">Dashboard</a>
+                                </li>                            
+                                <li class="nav-item">
+                                    <a class="nav-link neon-text nav-link-custom btn btn-gradient btn btn-danger" asp-area="" asp-controller="User" asp-action="Profile">@ViewBag.UserName</a>
+                                </li>
+                                                        
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link neon-text nav-link-custom" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-primary btn-gradient" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                           
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container py-4">
+        @RenderBody()
+    </main>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><i class="fa-solid fa-house"></i><a asp-area="" asp-controller="Home" asp-action="Index">  Home</a></li>
+                        <li><i class="fa-solid fa-shield-halved"></i><a asp-area="" asp-controller="Home" asp-action="Privacy">  Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="footer-title">Social Media</h5>
+                    <ul class="footer-social">
+                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="footer-title">Contact Us</h5>
+                    <p><i class="fa-solid fa-location-dot">  </i>     123, GameZone Street, Bangalore, Karnataka, India</p>
+                    <p><i class="fa-solid fa-envelope"></i>     Email: info@gamezone.com</p>
+                    <p><i class="fa-solid fa-headset"></i>      Phone: +91 87534 21718</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; @DateTime.Now.Year GameZone. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    @RenderSection("Scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/e8c41bb864.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+</body>
+</html>

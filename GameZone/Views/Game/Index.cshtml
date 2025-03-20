@@ -1,0 +1,55 @@
+﻿@model List<GameZone.Models.Game>
+@{
+    ViewData["Title"] = "Our Games";
+}
+
+<form asp-action="Index" asp-controller="Game" method="get">
+    <div class="search-bar">
+        <input type="text" class="form-control" placeholder="Search Games..." name="searchString">
+        <button type="submit" class="btn btn-primary btn-gradient">Search</button>
+    </div>
+</form>
+
+<div class="row">
+    @foreach (var game in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="game-card neon-border">
+                @if (game.ImageData != null)
+                { 
+                    <img class="game-image" src="@Url.Action("GetImage", "Game", new { id = game.Id })" alt="@game.Name" />
+                }
+                else
+                {
+                    <p>No image available.</p>
+                }
+                
+                <div class="card-body light-bg-text">
+                    <h5 class="card-title neon-text">@game.Name</h5>
+                    <p class="card-text">@game.Description</p>
+                    <a href="#" class="btn btn-primary btn-gradient" data-bs-toggle="modal" data-bs-target="#gameModal-@game.Id">View Details</a>
+                    <a asp-action="Details" asp-controller="Game" asp-route-id="@game.Id" class="btn btn-primary btn-gradient">More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="gameModal-@game.Id" tabindex="-1" aria-labelledby="gameModalLabel-@game.Id" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title neon-text" id="gameModalLabel-@game.Id">@game.Name Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body light-bg-text">
+                        <p><strong>Description:</strong> @game.Description</p>
+                        <p><strong>Price:</strong> $@game.Price</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

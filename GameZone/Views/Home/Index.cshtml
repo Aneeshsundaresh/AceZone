@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<video autoplay muted loop class="hero-video">
+    <source src="~/videos/futuristic-bg.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+</video>
+<div class="hero-section">
+    
+    <div class="hero-content">
+        <h1 class="display-4 neon-text">Welcome to AceZone</h1>
+        <p class="lead">Experience the Future of Gaming</p>
+        <div class="mt-4">
+            <a asp-controller="Booking" asp-action="Create" class="btn btn-primary btn-lg btn-gradient">Book Now</a>
+            <a asp-controller="Game" asp-action="Index" class="btn btn-secondary btn-lg btn-gradient">Explore Games</a>
+        </div>
+    </div>
+</div>
+
+<div class="featured-games">
+    <h2 class="neon-text">Featured Games</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="game-card neon-border">
+                <img src="~/images/Bowling.jpg" class="game-image" alt="Game 1">
+                <div class="card-body light-bg-text">
+                    <h5 class="card-title neon-text">Bowling</h5>
+                    <p class="card-text">6 Lanes of Bowling Craziness for you and your family.</p>
+                    
+                    <a asp-action="Index" asp-controller="Game" class="btn btn-primary btn-gradient">View Game</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="game-card neon-border">
+                <img src="~/images/bumpercars.jpg" class="game-image" alt="Game 1">
+                <div class="card-body light-bg-text">
+                    <h5 class="card-title neon-text">Bumper Cars</h5>
+                    <p class="card-text">Experience the best family friendly and fun driving game at AceZone.</p>
+
+                    <a asp-action="Index" asp-controller="Game" class="btn btn-primary btn-gradient">View Game</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="game-card neon-border">
+                <img src="~/images/shooting.jpg" class="game-image" alt="Game 1">
+                <div class="card-body light-bg-text">
+                    <h5 class="card-title neon-text">Shooting Range</h5>
+                    <p class="card-text">Experience The best 10 player shooting range at AceZone.</p>
+
+                    <a asp-action="Index" asp-controller="Game" class="btn btn-primary btn-gradient">View Game</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Parallax effect (requires JavaScript)
+    window.addEventListener('scroll', function() {
+        var hero = document.querySelector('.hero-section');
+        hero.style.backgroundPositionY = window.pageOffset * 0.5 + 'px';
+    });
+
+    window.addEventListener('resize', function() {
+        var video = document.querySelector('.hero-video');
+        video.style.width = window.innerWidth + 'px';
+        video.style.height = window.innerHeight + 'px';
+    });
+
+    // Initial resize on page load
+    window.addEventListener('load', function() {
+        var video = document.querySelector('.hero-video');
+        video.style.width = window.innerWidth + 'px';
+        video.style.height = window.innerHeight + 'px';
+    });
+</script>

@@ -1,0 +1,13 @@
+﻿@model GameZone.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<div class="delete-game">
+    <h1>Delete Game</h1>
+    <h3>Are you sure you want to delete @Model.Username?</h3>
+    <form asp-action="DeleteUser" asp-controller="Admin" method="post">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Users" asp-controller="Admin" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

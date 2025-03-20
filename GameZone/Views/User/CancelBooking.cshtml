@@ -1,0 +1,20 @@
+﻿@model GameZone.Models.Booking
+
+@{
+    ViewData["Title"] = "Cancel Booking";
+}
+
+<div class="cancel-booking">
+    <h1>Cancel Booking</h1>
+    <h3>Are you sure you want to cancel your booking for @Model.Game.Name?</h3>
+    <p><strong>Date:</strong> @Model.BookingDate.ToShortDateString()</p>
+    <p><strong>Time:</strong> @Model.BookingTime</p>
+    <p><strong>Duration:</strong> @Model.Duration hours</p>
+
+    <form asp-action="CancelBookingConfirmed" asp-route-id="@Model.Id" method="post">
+        @Html.AntiForgeryToken()  @* Add this for security *@
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" asp-action="CancellBooking" class="btn btn-danger">Cancel Booking</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to Bookings</a>
+    </form>
+</div>
